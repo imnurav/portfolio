@@ -25,6 +25,9 @@
     "react-toastify": "^11.0.5",
     "sharp": "^0.34.5"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.16",
     "@types/node": "^25.2.3",
