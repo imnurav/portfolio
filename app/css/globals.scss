@@ -1,5 +1,9 @@
 @use "tailwindcss";
 
+html {
+  scroll-padding-top: 6rem;
+}
+
 :root {
   --foreground-rgb: rgb(211, 216, 232);
 }
