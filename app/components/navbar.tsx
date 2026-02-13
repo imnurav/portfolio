@@ -1,10 +1,13 @@
 "use client";
-
-import Link from "next/link";
+import { HiMenu, HiX } from "react-icons/hi";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Link from "next/link";
 
 function Navbar() {
     const router = useRouter();
+    const [isOpen, setIsOpen] = useState(false);
+
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
         const targetId = href.split('#')[1];
@@ -16,75 +19,94 @@ function Navbar() {
                     block: 'start' as const
                 });
             }
+        } else if (href === '#') {
+            // Scroll to top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         } else {
             router.push(href);
         }
+        // Close mobile menu after clicking
+        setIsOpen(false);
     };
 
-    return (
-        <nav className="bg-transparent">
-            <div className="flex items-center justify-between py-5">
-                <div className="flex flex-shrink-0 items-center">
-                    <Link
-                        href="/"
-                        className=" text-[#16f2b3] text-3xl font-bold">
-                        VARUN KUMAR
-                    </Link>
-                </div>
+    const navItems = [
+        { label: "ABOUT", href: "/#about" },
+        { label: "EXPERIENCE", href: "/#experience" },
+        { label: "SKILLS", href: "/#skills" },
+        { label: "EDUCATION", href: "/#education" },
+        { label: "PROJECTS", href: "/#projects" },
+    ];
 
-                <ul className="mt-4 flex h-screen max-h-0 w-full flex-col items-start text-sm opacity-0 md:mt-0 md:h-auto md:max-h-screen md:w-auto md:flex-row md:space-x-1 md:border-0 md:opacity-100" id="navbar-default">
-                    <li>
-                        <a
-                            onClick={(e) => handleClick(e, '/#about')}
-                            href="/#about"
-                            className="block cursor-pointer px-4 py-2 no-underline outline-none hover:no-underline"
+    return (
+        <nav className="sticky top-0 z-99! bg-[#0d1224] border-b border-[#25213b] w-full">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16">
+                    {/* Logo */}
+                    <div className="flex-shrink-0">
+                        <Link
+                            onClick={(e) => handleClick(e, '#')}
+                            href="#"
+                            className="text-[#16f2b3] text-2xl sm:text-3xl font-bold hover:text-pink-600 transition-colors duration-300"
                         >
-                            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">ABOUT</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            onClick={(e) => handleClick(e, '/#experience')}
-                            href="/#experience"
-                            className="block cursor-pointer px-4 py-2 no-underline outline-none hover:no-underline"
+                            VARUN KUMAR
+                        </Link>
+                    </div>
+
+                    {/* Desktop Menu */}
+                    <ul className="hidden md:flex items-center space-x-1">
+                        {navItems.map((item) => (
+                            <li key={item.href}>
+                                <Link
+                                    onClick={(e) => handleClick(e, item.href)}
+                                    href={item.href}
+                                    className="px-3 py-2 text-sm text-white hover:text-pink-600 transition-colors duration-300"
+                                >
+                                    {item.label}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+
+                    {/* Mobile Menu Button */}
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-[#16f2b3] hover:text-pink-600 focus:outline-none transition-colors duration-500"
+                        aria-expanded="false"
+                    >
+                        {isOpen ? (
+                            <HiX className="h-6 w-6" />
+                        ) : (
+                            <HiMenu className="h-6 w-6" />
+                        )}
+                    </button>
+                </div>
+            </div>
+
+            {/* Mobile Menu */}
+            <div
+                className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out origin-top ${isOpen
+                    ? "max-h-screen opacity-100 scale-y-100"
+                    : "max-h-0 opacity-0 scale-y-95"
+                    }`}
+            >
+                <div className="bg-[#0d1224] border-t border-[#25213b] px-2 pt-2 pb-3 space-y-1">
+                    {navItems.map((item) => (
+                        <Link
+                            key={item.href}
+                            onClick={(e) => handleClick(e, item.href)}
+                            href={item.href}
+                            className="block px-3 py-2 text-sm text-white hover:text-pink-600 hover:bg-[#1a1f35] rounded-md transition-colors duration-300"
                         >
-                            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">EXPERIENCE</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            onClick={(e) => handleClick(e, '/#skills')}
-                            href="/#skills"
-                            className="block cursor-pointer px-4 py-2 no-underline outline-none hover:no-underline"
-                        >
-                            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">SKILLS</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            onClick={(e) => handleClick(e, '/#education')}
-                            href="/#education"
-                            className="block cursor-pointer px-4 py-2 no-underline outline-none hover:no-underline"
-                        >
-                            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">EDUCATION</div>
-                        </a>
-                    </li>
-                    <li>
-                        <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/blog"><div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">BLOGS</div></Link>
-                    </li>
-                    <li>
-                        <a
-                            onClick={(e) => handleClick(e, '/#projects')}
-                            href="/#projects"
-                            className="block cursor-pointer px-4 py-2 no-underline outline-none hover:no-underline"
-                        >
-                            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">PROJECTS</div>
-                        </a>
-                    </li>
-                </ul>
+                            {item.label}
+                        </Link>
+                    ))}
+                </div>
             </div>
         </nav>
     );
-};
+}
 
 export default Navbar;

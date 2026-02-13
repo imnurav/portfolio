@@ -1,5 +1,5 @@
 "use client";
-import { FaGithub, FaStar, FaCodeBranch, FaFolder, FaLanguage, FaCalendarAlt, FaUserFriends, FaChartBar } from "react-icons/fa";
+import { FaGithub, FaStar, FaCodeBranch, FaFolder, FaLanguage, FaCalendarAlt, FaUserFriends } from "react-icons/fa";
 import { personalData } from "@/utils/data/personal-data";
 import { useState, useEffect } from "react";
 

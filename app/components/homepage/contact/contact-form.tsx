@@ -27,7 +27,7 @@ function ContactForm() {
     message: "",
   });
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-
+  const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
   const checkRequired = () => {
     if (userInput.email && userInput.message && userInput.name) {
       setError({ ...error, required: false });
@@ -72,7 +72,7 @@ function ContactForm() {
 
     try {
       setIsLoading(true);
-      
+
       // Verify reCAPTCHA first
       const isRecaptchaValid = await verifyRecaptcha(recaptchaToken);
       if (!isRecaptchaValid) {
@@ -151,11 +151,11 @@ function ContactForm() {
               value={userInput.message}
             />
           </div>
-          
-          <div className="flex flex-col gap-2">
-            <label className="text-base">Security Check: </label>
+
+          <div className="flex flex-col gap-2 justify-center items-center">
+            <label className="text-base text">Security Check: </label>
             <ReCAPTCHA
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+              sitekey={recaptchaSiteKey}
               onChange={handleRecaptchaChange}
             />
             {error.recaptcha && <p className="text-sm text-red-400">Please complete the security check!</p>}
@@ -172,11 +172,11 @@ function ContactForm() {
             >
               {
                 isLoading ?
-                <span>Sending Message...</span>:
-                <span className="flex items-center gap-1">
-                  Send Message
-                  <TbMailForward size={20} />
-                </span>
+                  <span>Sending Message...</span> :
+                  <span className="flex items-center gap-1">
+                    Send Message
+                    <TbMailForward size={20} />
+                  </span>
               }
             </button>
           </div>

@@ -13,7 +13,7 @@ export interface PersonalData {
   designation: string;
   description: string;
   devUsername: string;
-  stackOverflow: string;
+  // stackOverflow: string;
 }
 
 export const personalData: PersonalData = {
@@ -29,7 +29,7 @@ export const personalData: PersonalData = {
   facebook: "https://facebook.com/imnurav",
   linkedIn: "https://www.linkedin.com/in/imnurav",
   twitter: "https://x.com/iamnurav",
-  stackOverflow: "https://stackoverflow.com/users/10967944/imnurav",
+  // stackOverflow: "https://stackoverflow.com/users/10967944/imnurav",
   leetcode: "https://leetcode.com/imnurav/",
   devUsername: "imnurav",
   resume:

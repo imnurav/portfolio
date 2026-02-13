@@ -1,13 +1,13 @@
-import { ReactNode } from 'react';
 import { GoogleTagManager } from "@next/third-parties/google";
-import { Inter } from "next/font/google";
+import ScrollToTop from "./components/helper/scroll-to-top";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Inter } from "next/font/google";
 import Footer from "./components/footer";
-import ScrollToTop from "./components/helper/scroll-to-top";
 import Navbar from "./components/navbar";
-import "./css/card.scss";
+import { ReactNode } from 'react';
 import "./css/globals.scss";
+import "./css/card.scss";
 
 const inter = Inter({ subsets: ["latin"] });
 
