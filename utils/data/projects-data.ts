@@ -8,6 +8,8 @@ interface Project {
   demo: string;
   image?: string;
   features?: string[];
+  category: "onsite" | "fullstack" | "backend" | "frontend" | "mobile";
+  isFeatured?: boolean;
 }
 
 export const projectsData: Project[] = [
@@ -27,6 +29,8 @@ export const projectsData: Project[] = [
     role: "Frontend Developer",
     code: "",
     demo: "https://khanglobalstudies.com",
+    category: "frontend",
+    isFeatured: true,
   },
   {
     id: 3,
@@ -43,6 +47,7 @@ export const projectsData: Project[] = [
     role: "Full Stack Developer",
     code: "",
     demo: "https://play.google.com/store/apps/details?id=xyz.penpencil.khansirofficial",
+    category: "mobile",
   },
   {
     id: 2,
@@ -60,6 +65,8 @@ export const projectsData: Project[] = [
     role: "Backend Developer",
     code: "",
     demo: "",
+    category: "backend",
+    isFeatured: true,
   },
 
   {
@@ -71,6 +78,7 @@ export const projectsData: Project[] = [
     role: "Backend Developer",
     code: "",
     demo: "",
+    category: "backend",
   },
   {
     id: 7,
@@ -81,6 +89,7 @@ export const projectsData: Project[] = [
     role: "Full Stack Developer",
     code: "",
     demo: "",
+    category: "fullstack",
   },
   {
     id: 8,
@@ -91,6 +100,8 @@ export const projectsData: Project[] = [
     role: "Full Stack Developer",
     code: "",
     demo: "",
+    category: "fullstack",
+    isFeatured: true,
   },
   {
     id: 4,
@@ -101,6 +112,7 @@ export const projectsData: Project[] = [
     role: "Full Stack Developer",
     code: "",
     demo: "",
+    category: "fullstack",
   },
   {
     id: 5,
@@ -111,16 +123,7 @@ export const projectsData: Project[] = [
     role: "Backend Developer",
     code: "",
     demo: "",
-  },
-  {
-    id: 9,
-    name: "Additional GitHub Projects",
-    description:
-      "Built multiple personal and experimental projects to explore new technologies and strengthen problem-solving skills, covering full-stack development and system design concepts.",
-    tools: ["TypeScript", "React", "Node.js", "MongoDB"],
-    role: "Full Stack Developer",
-    code: "https://github.com/",
-    demo: "",
+    category: "backend",
   },
 ];
 

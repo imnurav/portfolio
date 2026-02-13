@@ -5,6 +5,8 @@ interface Project {
   tools: string[];
   role: string;
   description: string;
+  features?: string[];
+  category?: string;
 }
 
 interface ProjectCardProps {
@@ -25,9 +27,16 @@ function ProjectCard({ project }: ProjectCardProps) {
           <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-orange-400"></div>
           <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-green-200"></div>
         </div>
-        <p className="text-center ml-3 text-[#16f2b3] text-base lg:text-xl">
-          {project.name}
-        </p>
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-center ml-3 text-[#16f2b3] text-base lg:text-xl">
+            {project.name}
+          </p>
+          {project.category && (
+            <span className="text-xs px-2 py-1 bg-[#1a1443] rounded-full text-[#16f2b3] border border-[#25213b]">
+              {project.category}
+            </span>
+          )}
+        </div>
       </div>
       <div className="overflow-hidden border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8">
         <code className="font-mono text-xs md:text-sm lg:text-base">
@@ -66,10 +75,31 @@ function ProjectCard({ project }: ProjectCardProps) {
             <span className="text-gray-400">,</span>
           </div>
           <div className="ml-4 lg:ml-8 mr-2">
-            <span className="text-white">Description:</span>
+            <span className="text-white">description:</span>
             <span className="text-cyan-400">{' ' + project.description}</span>
             <span className="text-gray-400">,</span>
           </div>
+          
+          {project.features && project.features.length > 0 && (
+            <div>
+              <div className="ml-4 lg:ml-8 mr-2">
+                <span className="text-white">features:</span>
+                <span className="text-gray-400">{` [`}</span>
+              </div>
+              {project.features.map((feature, i) => (
+                <div key={i} className="ml-8 lg:ml-12">
+                  <span className="text-green-300">{`"${feature}"`}</span>
+                  {project.features && i < project.features.length - 1 && (
+                    <span className="text-gray-400">,</span>
+                  )}
+                </div>
+              ))}
+              <div className="ml-4 lg:ml-8">
+                <span className="text-gray-400">{`],`}</span>
+              </div>
+            </div>
+          )}
+          
           <div><span className="text-gray-400">{`};`}</span></div>
         </code>
       </div>
